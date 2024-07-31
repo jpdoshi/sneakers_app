@@ -7,13 +7,8 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppbar(context: context, titleText: const Text(
-        'Product Name',
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold
-        ),
-      )),
+      appBar: MyAppbar(context: context),
+      body: const Text('Products Title'),
     );
   }
 }
