@@ -5,6 +5,7 @@ import 'package:sneakers_app/components/home_view.dart';
 import 'package:sneakers_app/components/my_appbar.dart';
 import 'package:sneakers_app/components/profile_view.dart';
 import 'package:sneakers_app/components/cart_view.dart';
+import 'package:sneakers_app/components/search_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> viewList = [
     const HomeView(),
     const FavoritesView(),
+    const SearchView(),
     const CartView(),
     const ProfileView()
   ];
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 12)],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8)],
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24), topRight: Radius.circular(24))
         ),
@@ -68,17 +70,27 @@ class _HomePageState extends State<HomePage> {
                 splashColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                icon: Icon(CupertinoIcons.bag, color: (currentViewIndex == 2) ?
+                icon: Icon(CupertinoIcons.search, color: (currentViewIndex == 2) ?
+                  Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.secondary)),
+              IconButton(onPressed: () {
+                setState(() {
+                  currentViewIndex = 3;
+                });
+              },
+                  splashColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  icon: Icon(CupertinoIcons.bag, color: (currentViewIndex == 3) ?
                   Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.secondary)),
               IconButton(onPressed: () {
                   setState(() {
-                    currentViewIndex = 3;
+                    currentViewIndex = 4;
                   });
                 },
                 splashColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                icon: Icon(CupertinoIcons.person, color: (currentViewIndex == 3) ?
+                icon: Icon(CupertinoIcons.person, color: (currentViewIndex == 4) ?
                   Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.secondary)),
             ],
           ),
