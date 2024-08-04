@@ -19,7 +19,7 @@ class _HomeViewState extends State<HomeView> {
         children: [
           const MyCarousel(),
           SizedBox(
-            height: 46,
+            height: 40,
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               scrollDirection: Axis.horizontal,

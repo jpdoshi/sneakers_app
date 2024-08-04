@@ -9,7 +9,8 @@ ThemeData myTheme = ThemeData(
     tertiary: Color(0xffeeeeee),
   ),
   appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      elevation: 0,
+    backgroundColor: Colors.white,
+    surfaceTintColor: Colors.white,
+    elevation: 0,
   ),
 );
