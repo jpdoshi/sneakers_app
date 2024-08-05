@@ -70,17 +70,27 @@ class _ProductPageState extends State<ProductPage> {
                                 });
                               },
                               child: Container(
-                                height: 28,
-                                width: 28,
-                                margin: const EdgeInsets.symmetric(horizontal: 8),
+                                height: 32,
+                                width: 32,
+                                margin: const EdgeInsets.symmetric(horizontal: 4),
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    width: 3,
+                                    width: 1,
                                     color: (index == colorVariantIndex)
-                                      ? Theme.of(context).colorScheme.primary: Colors.transparent),
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: HexColor(snapshot.data['colorVariants'][index]['color'])
-                              )),
+                                      ? Theme.of(context).colorScheme.secondary: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Theme.of(context).colorScheme.tertiary),
+                                      borderRadius: BorderRadius.circular(32),
+                                      color: HexColor(snapshot.data['colorVariants'][index]['color']),
+                                    )
+                                  ),
+                                ),
+                              ),
                             )
                           ),
                         )

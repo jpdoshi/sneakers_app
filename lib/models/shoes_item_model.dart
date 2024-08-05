@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:sneakers_app/config.dart';
 
-Future<List<dynamic>> getAllShoes() async {
-  var result = await http.get(Uri.parse('$connectionUrl/shoes'));
+Future<List<dynamic>> getShoesByCategory(String category) async {
+  var result = await http.post(Uri.parse('$connectionUrl/shoes/category/$category'));
   return jsonDecode(result.body);
 }
 
