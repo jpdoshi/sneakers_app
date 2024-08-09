@@ -15,7 +15,10 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   int colorVariantIndex = 0;
+  int sizeIndex = 0;
+
   late Future<Map> preFetchedShoes;
+  List<String> shoeSizes = ['UK 6', 'UK 7', 'UK 8', 'UK 9'];
 
   @override
   void initState() {
@@ -47,7 +50,7 @@ class _ProductPageState extends State<ProductPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Transform.translate(
-                          offset: const Offset(0, -100),
+                          offset: const Offset(0, -50),
                           child: Image.network(
                             snapshot.data['colorVariants'][colorVariantIndex]['imgUrl'],
                             height: MediaQuery.of(context).size.width,
@@ -58,7 +61,7 @@ class _ProductPageState extends State<ProductPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(children: [
-                        SizedBox(height: MediaQuery.of(context).size.width - 160),
+                        const SizedBox(height: 285),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
@@ -95,6 +98,98 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         )
                       ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ListView(
+                        primary: false,
+                        shrinkWrap: true,
+                        children: [
+                          const SizedBox(height: 350),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                children: [
+                                  const Text('₹', style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                                  const SizedBox(width: 2),
+                                  Text('${snapshot.data['price']}', style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 28,
+                                    height: 1.15
+                                  )),
+                                ],
+                              ),
+                              Text((snapshot.data['discount'] > 0)
+                                  ? '${snapshot.data['discount']}% OFF' : 'No Offers',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.red.shade700
+                              ))]),
+                              IconButton(
+                                color: Colors.red.shade700,
+                                onPressed: () {
+                                  // add to favorites
+                                },
+                                icon: Icon(
+                                  Icons.favorite_border_rounded,
+                                  size: 32,
+                                  color: Colors.black.withOpacity(0.6)
+                              )),
+                          ]),
+                          const SizedBox(height: 36),
+                          const Text('Size', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          SizedBox(
+                            height: 64,
+                            child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: shoeSizes.length,
+                                separatorBuilder: (context, index) => const SizedBox(width: 8),
+                                itemBuilder: (context, index) {
+                                  return ChoiceChip(
+                                    showCheckmark: false,
+                                    selectedColor: const Color(0xffF5F5F5),
+                                    color: const WidgetStatePropertyAll(Color(0xffF5F5F5)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    side: BorderSide(color: (index == sizeIndex) ? Colors.black : Colors.black.withOpacity(0.1)),
+                                    padding: const EdgeInsets.all(8),
+                                    label: Text(shoeSizes[index], style: const TextStyle(fontSize: 15)),
+                                    selected: index == sizeIndex,
+                                    onSelected: (selected) {
+                                      setState(() {
+                                        sizeIndex = (selected) ? index : 0;
+                                      });
+                                    },
+                                  );
+                                }),
+                          ),
+                          const SizedBox(height: 12),
+                          InkWell(
+                            onTap: () {
+                              // add to bag
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(12)
+                              ),
+                              child: const Text('Add To Bag',
+                                textAlign: TextAlign.center, style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.w500,
+                                  fontSize: 16
+                              )),
+                            ),
+                          )
+                        ],
+                      ),
                     )
                   ]
                 )]
