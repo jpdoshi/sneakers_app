@@ -8,6 +8,11 @@ Future<List<dynamic>> getShoesByCategory(String category) async {
   return jsonDecode(result.body);
 }
 
+Future<List<dynamic>> searchShoes(String query) async {
+  var result = await http.post(Uri.parse('$connectionUrl/shoes/search/?q=$query'));
+  return jsonDecode(result.body);
+}
+
 Future<Map> getShoesById(String shoesId) async {
   var result = await http.get(Uri.parse('$connectionUrl/shoes/$shoesId'));
   return jsonDecode(result.body);
